@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import InputSearchBike from './InputSearchBike';
 import { useSelector } from "react-redux";
 import ReactPaginate from 'react-paginate';
 import './IndexPage.css'

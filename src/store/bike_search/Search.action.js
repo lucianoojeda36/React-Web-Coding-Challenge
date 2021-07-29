@@ -11,6 +11,7 @@ export const findStolenBike = (props) => {
   return (dispatch) => {
     axios.get(`https://bikeindex.org/api/v2/bikes_search`)
     .then((res) => {
+      dispatch({ type: GET_IS_LOADING_STOLEN_BIKE, payload: true })
       const expresionSearchBike = new RegExp(`${props.searchBike}.*`, "i");
     
       const expresionStartDate = `${Date.parse(props.startDate)/1000}`
@@ -21,21 +22,17 @@ export const findStolenBike = (props) => {
       
       if (props.searchBike && props.SearchBike !=="" && !props.startDate && !props.endDate) {
         let result = _to_search_bike
-        console.log("=============>existe solo el nombre",result)
         dispatch({ type: GET_STOLEN_BIKE, payload: result })
       }
       else if (!props.searchBike){
         let result = _to_date_stolen 
-        console.log("=============>existe solo la fecha",result)
         dispatch({ type: GET_STOLEN_BIKE, payload: result })
       }
       else if (props.searchBike && props.SearchBike !=="" && props.startDate && props.startDate !=="" && props.endDate && props.endDate !==""){
         let result = _to_date_stolen.filter((e)=>expresionSearchBike.test(e.title))
-        console.log("=============>existe el nombre y la fecha",result)
         dispatch({ type: GET_STOLEN_BIKE, payload: result })
       }
       else{
-        console.log("esta verga es una chota")
         dispatch({ type: GET_STOLEN_BIKE, payload:res.data.bikes })
       }
       
@@ -45,7 +42,7 @@ export const findStolenBike = (props) => {
       dispatch({ type: GET_ERROR_STOLEN_BIKE, payload: true })
     })
     .finally(()=>{
-      dispatch({ type: GET_IS_LOADING_STOLEN_BIKE, payload: true })
+      dispatch({ type: GET_IS_LOADING_STOLEN_BIKE, payload: false })
     })
   }
 }
