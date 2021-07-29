@@ -1,5 +1,7 @@
 import axios from "axios";
 export const GET_STOLEN_BIKE = "GET_STOLEN_BIKE";
+export const GET_ERROR_STOLEN_BIKE = "GET_ERROR_STOLEN_BIKE";
+export const GET_IS_LOADING_STOLEN_BIKE = "GET_IS_LOADING_STOLEN_BIKE";
 
 
 
@@ -33,12 +35,18 @@ export const findStolenBike = (props) => {
         dispatch({ type: GET_STOLEN_BIKE, payload: result })
       }
       else{
-        console.log("esta berga es una chota")
+        console.log("esta verga es una chota")
         dispatch({ type: GET_STOLEN_BIKE, payload:res.data.bikes })
       }
       
       })
-    .catch((error)=>{ console.log(error)})
+    .catch((error)=>{ 
+      console.log(error)
+      dispatch({ type: GET_ERROR_STOLEN_BIKE, payload: true })
+    })
+    .finally(()=>{
+      dispatch({ type: GET_IS_LOADING_STOLEN_BIKE, payload: true })
+    })
   }
 }
 

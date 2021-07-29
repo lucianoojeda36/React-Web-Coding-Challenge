@@ -51,46 +51,40 @@ export default function IndexPage() {
 
     return (
         <div className={classes.root}>
-            <InputSearchBike />
-            {
-                stolenBikesSearch && stolenBikesSearch[0] ?
-                    stolenBikesSearch.slice(pagesVisited, pagesVisited + bikesPerPage).map((e) => {
-                        return (
-                            <Paper className={classes.paper} key={e.id}>
-                                <Grid container spacing={2}>
-                                    <Grid item>
-                                        <ButtonBase className={classes.image}>
-                                            <img className={classes.img} alt="complex" src={e.large_img} />
-                                        </ButtonBase>
+            {stolenBikesSearch.slice(pagesVisited, pagesVisited + bikesPerPage).map((e) => {
+                return (
+                    <Paper className={classes.paper} key={e.id}>
+                        <Grid container spacing={2}>
+                            <Grid item>
+                                <ButtonBase className={classes.image}>
+                                    <img className={classes.img} alt="complex" src={e.large_img} />
+                                </ButtonBase>
+                            </Grid>
+                            <Grid item xs={12} sm container>
+                                <Grid item xs container direction="column" spacing={2}>
+                                    <Grid item xs>
+                                        <Typography gutterBottom variant="subtitle1">
+                                            Model: {e.title}
+                                        </Typography>
+                                        <Typography variant="body2" gutterBottom>
+                                            Description: {e.description}
+                                        </Typography>
+                                        <Typography variant="body2" color="textSecondary">
+                                            Stolen: {e.date_stolen}
+                                        </Typography>
                                     </Grid>
-                                    <Grid item xs={12} sm container>
-                                        <Grid item xs container direction="column" spacing={2}>
-                                            <Grid item xs>
-                                                <Typography gutterBottom variant="subtitle1">
-                                                    Model: {e.title}
-                                                </Typography>
-                                                <Typography variant="body2" gutterBottom>
-                                                    Description: {e.description}
-                                                </Typography>
-                                                <Typography variant="body2" color="textSecondary">
-                                                    Stolen: {e.date_stolen}
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item>
-                                                <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                                                    Stolen Location: {e.stolen_location}
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
+                                    <Grid item>
+                                        <Typography variant="body2" style={{ cursor: 'pointer' }}>
+                                            Stolen Location: {e.stolen_location}
+                                        </Typography>
                                     </Grid>
                                 </Grid>
-                            </Paper>
-                        )
-                    })
-                    : <h1>No Results</h1>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+                )
+            })
             }
-
-
             <ReactPaginate
                 previousLabel={"Previous"}
                 nextLabel={"Next"}
