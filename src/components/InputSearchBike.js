@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from "react-redux";
 import { findStolenBike } from "../store/bike_search/Search.action";
 import { CardMedia, Paper } from "@material-ui/core";
+import styled from 'styled-components'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,6 +17,18 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 }));
+
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: black;
+`;
+const SubTitle = styled.h4`
+  font-size: 1em;
+  text-align: center;
+  color: black;
+`;
 
 
 
@@ -39,7 +52,6 @@ export default function InputSearchBike() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('hola')
         dispatch(findStolenBike(state))
     };
 
@@ -52,8 +64,8 @@ export default function InputSearchBike() {
                     </Paper>
                 </Grid>
                 <Grid>
-                    <h1>Police Department of Berlin</h1>
-                    <h4>Stolen bykes</h4>
+                    <Title>Police Department of Berlin</Title>
+                    <SubTitle>Stolen bykes</SubTitle>
                 </Grid>
             </Grid>
             <form className={classes.root} onSubmit={handleSubmit}>
