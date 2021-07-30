@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(2),
         margin: 'auto',
-        maxWidth:'75%',
+        maxWidth:'858px',
+        minWidth:'858px',
     },
     image: {
         width: 128,

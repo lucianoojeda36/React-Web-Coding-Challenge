@@ -3,11 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from "react-redux";
 import { findStolenBike } from "../store/bike_search/Search.action";
 import { Paper } from "@material-ui/core";
 import styled from 'styled-components'
+import {DataState} from '../interfaces/DataType'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,7 +41,7 @@ export default function InputSearchBike() {
     const [endDate, setEndDate] = useState('')
 
 
-    const state = {
+    const state : DataState = {
         searchBike,
         startDate,
         endDate
@@ -50,24 +50,25 @@ export default function InputSearchBike() {
     const classes = useStyles();
 
 
-    const handleSubmit = (event : any) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault();
         dispatch(findStolenBike(state))
     };
 
     return (
-        <Grid>
-            <Grid style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+        <Grid style={{margin:'20px'}}>
+            <Grid style={{ display: 'flex',flexDirection: 'row' }}>
                 <Grid >
                     <Paper variant="outlined" >
-                        <img alt = 'not found' style={{ width: '150px', height: '150px' }} src='https://superol3g.github.io/coding-challenge-frontend-react/static/media/logo.aba6572d.svg' />
+                        <img style={{ width: '150px', height: '150px' }} src='https://superol3g.github.io/coding-challenge-frontend-react/static/media/logo.aba6572d.svg' />
                     </Paper>
                 </Grid>
-                <Grid>
+                <Grid style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center',marginLeft:'150px' }}>
                     <Title>Police Department of Berlin</Title>
                     <SubTitle>Stolen bykes</SubTitle>
                 </Grid>
             </Grid>
+
             <form className={classes.root} onSubmit={handleSubmit}>
                 <TextField
                     id="standard-secondary"
@@ -83,7 +84,6 @@ export default function InputSearchBike() {
                     label="From"
                     type="datetime-local"
                     defaultValue="2017-05-24T10:30"
-                    // className={classes.textField}
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -95,7 +95,6 @@ export default function InputSearchBike() {
                     value={endDate}
                     type="datetime-local"
                     defaultValue="2017-05-24T10:30"
-                    // className={classes.textField}
                     InputLabelProps={{
                         shrink: true,
                     }}

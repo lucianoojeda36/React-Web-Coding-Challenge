@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-// import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from "react-redux";
 import { findStolenBike } from "../store/bike_search/Search.action";
 import { Paper } from "@material-ui/core";
@@ -57,7 +56,7 @@ export default function InputSearchBike() {
 
     return (
         <Grid style={{margin:'20px'}}>
-            <Grid style={{ display: 'flex', flexDirection: 'row' }}>
+            <Grid style={{ display: 'flex',flexDirection: 'row' }}>
                 <Grid >
                     <Paper variant="outlined" >
                         <img style={{ width: '150px', height: '150px' }} src='https://superol3g.github.io/coding-challenge-frontend-react/static/media/logo.aba6572d.svg' />

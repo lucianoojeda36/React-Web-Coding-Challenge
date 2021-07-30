@@ -20,7 +20,7 @@ export const findStolenBike = (props) => {
       const _to_date_stolen = res.data.bikes.filter((e)=>e.date_stolen > expresionStartDate && e.date_stolen < expresionEndDate)
       const _to_search_bike = res.data.bikes.filter((e)=>expresionSearchBike.test(e.title))
       
-      if (props.searchBike && props.SearchBike !=="" && !props.startDate && !props.endDate) {
+      if (props.searchBike && props.searchBike !=="" && !props.startDate && !props.endDate) {
         let result = _to_search_bike
         dispatch({ type: GET_STOLEN_BIKE, payload: result })
       }
@@ -28,7 +28,7 @@ export const findStolenBike = (props) => {
         let result = _to_date_stolen 
         dispatch({ type: GET_STOLEN_BIKE, payload: result })
       }
-      else if (props.searchBike && props.SearchBike !=="" && props.startDate && props.startDate !=="" && props.endDate && props.endDate !==""){
+      else if (props.searchBike && props.searchBike !=="" && props.startDate && props.startDate !=="" && props.endDate && props.endDate !==""){
         let result = _to_date_stolen.filter((e)=>expresionSearchBike.test(e.title))
         dispatch({ type: GET_STOLEN_BIKE, payload: result })
       }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import {DataState, DataType} from '../../interfaces/DataType'
 export const GET_STOLEN_BIKE = "GET_STOLEN_BIKE";
 export const GET_ERROR_STOLEN_BIKE = "GET_ERROR_STOLEN_BIKE";
 export const GET_IS_LOADING_STOLEN_BIKE = "GET_IS_LOADING_STOLEN_BIKE";
@@ -6,7 +7,8 @@ export const GET_IS_LOADING_STOLEN_BIKE = "GET_IS_LOADING_STOLEN_BIKE";
 
 
 
-export const findStolenBike = (props : any) => {
+
+export const findStolenBike= (props:DataState) => {
 
   return (dispatch : any) => {
     axios.get(`https://bikeindex.org/api/v2/bikes_search`)
@@ -20,7 +22,7 @@ export const findStolenBike = (props : any) => {
       const _to_date_stolen = res.data.bikes.filter((e : any)=>e.date_stolen > expresionStartDate && e.date_stolen < expresionEndDate)
       const _to_search_bike = res.data.bikes.filter((e : any)=>expresionSearchBike.test(e.title))
       
-      if (props.searchBike && props.SearchBike !=="" && !props.startDate && !props.endDate) {
+      if (props.searchBike && props.searchBike !=="" && !props.startDate && !props.endDate) {
         let result = _to_search_bike
         dispatch({ type: GET_STOLEN_BIKE, payload: result })
       }
@@ -28,7 +30,7 @@ export const findStolenBike = (props : any) => {
         let result = _to_date_stolen 
         dispatch({ type: GET_STOLEN_BIKE, payload: result })
       }
-      else if (props.searchBike && props.SearchBike !=="" && props.startDate && props.startDate !=="" && props.endDate && props.endDate !==""){
+      else if (props.searchBike && props.searchBike !=="" && props.startDate && props.startDate !=="" && props.endDate && props.endDate !==""){
         let result = _to_date_stolen.filter((e : any)=>expresionSearchBike.test(e.title))
         dispatch({ type: GET_STOLEN_BIKE, payload: result })
       }

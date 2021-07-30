@@ -7,7 +7,8 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import { useSelector } from "react-redux";
 import ReactPaginate from 'react-paginate';
 import './IndexPage.css'
-import imagenBicicleta from '../assets/illustration.png'    
+import imagenBicicleta from '../assets/illustration.png'
+import {DataType} from '../interfaces/DataType'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(2),
         margin: 'auto',
-        maxWidth: 1000,
+        maxWidth:'858px',
+        minWidth:'858px',
     },
     image: {
         width: 128,
@@ -30,10 +32,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function IndexPage(): any{
+export default function IndexPage() {
     const classes = useStyles();
 
-    const stolenBikesSearch : any[] = useSelector((state : any) => state?.stolen_bikes)
+    const stolenBikesSearch: DataType[]= useSelector((state:any) => state?.stolen_bikes)
 
     const [pageNumber, setPageNumber] = useState(0);
 
@@ -43,7 +45,7 @@ export default function IndexPage(): any{
 
     const pageCount : number = Math.ceil(stolenBikesSearch.length / bikesPerPage);
 
-    const changePage : any = ({ selected } : any) => {
+    const changePage : any = ({ selected } :any) => {
         setPageNumber(selected);
     };
 
@@ -51,7 +53,7 @@ export default function IndexPage(): any{
 
     return (
         <div className={classes.root}>
-            {stolenBikesSearch.slice(pagesVisited, pagesVisited + bikesPerPage).map((e : any) => {
+            {stolenBikesSearch.slice(pagesVisited, pagesVisited + bikesPerPage).map((e:any) => {
                 return (
                     <Paper className={classes.paper} key={e.id}>
                         <Grid container spacing={2}>
@@ -62,21 +64,35 @@ export default function IndexPage(): any{
                             </Grid>
                             <Grid item xs={12} sm container>
                                 <Grid item xs container direction="row" spacing={2}>
-                                    <Grid item xs>
-                                        <Typography gutterBottom variant="subtitle1">
-                                            Title: {e.title}
-                                        </Typography>
-                                        <Typography variant="body2" gutterBottom>
-                                            Description: {e.description}
-                                        </Typography>
+                                    <Grid item xs style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <Grid >
+                                            <Typography gutterBottom variant="subtitle1" style={{ color: 'blue', fontWeight: 'bold' }}>
+                                                {e.title}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid style={{ display: 'flex', alignItems: 'center',justifyContent:'space-around' }}>
+                                            <Typography variant="body2" gutterBottom style={{opacity:'0.5'}}>
+                                                {e.description}
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item>
-                                    <Typography variant="body2" color="textSecondary">
-                                        Date Stolen: {`${new Date(e.date_stolen*1000).getDate()}/${new Date(e.date_stolen*1000).getMonth()}/${new Date(e.date_stolen*1000).getFullYear()}`}
-                                        </Typography>
-                                        <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                                            Stolen Location: {e.stolen_location}
-                                        </Typography>
+                                    <Grid item style={{display:'flex', flexDirection:'column', justifyContent:'space-around',alignItems:'center'}}>
+                                        <Grid style={{ display: 'flex', alignItems: 'row' }}>
+                                            <Typography variant="body2" color="textPrimary" style={{ fontWeight: 'bold' }}>
+                                                Date Stolen:
+                                            </Typography>
+                                            <Typography variant="body2" color="textPrimary">
+                                                {`${new Date(e.date_stolen * 1000).getDate()}/${new Date(e.date_stolen * 1000).getMonth()}/${new Date(e.date_stolen * 1000).getFullYear()}`}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid style={{ display: 'flex', alignItems: 'row' }}>
+                                            <Typography variant="body2" style={{ color: 'red', fontWeight: 'bold' }}>
+                                                Stolen Location:
+                                            </Typography>
+                                            <Typography variant="body2" >
+                                                {e.stolen_location}
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
